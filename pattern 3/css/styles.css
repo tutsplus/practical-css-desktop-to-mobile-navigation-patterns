@@ -1,0 +1,282 @@
+/** ---------------------------------------------------------------------------
+ * Reset.
+ * ------------------------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font: 16px/1.5 'Roboto', Arial, sans-serif;
+}
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Navbar.
+ * ------------------------------------------------------------------------- */
+
+.navbar {
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .navbar a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, .60);
+        transition: color 200ms ease-in;
+    }
+
+        .navbar li:hover > a {
+            color: rgba(0, 0, 0, .85);
+        }
+
+.logo img {
+    /* Get rid of the bottom whitespace present on inline elements. */
+    display: block;
+    max-height: 3.5rem;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    position: relative;
+}
+
+/* 1st level. */
+.menu > ul > li {
+    display: inline-block;
+}
+
+    .menu > ul > li > a {
+        display: inline-block;
+        padding: 1rem 1.5rem;
+        font-weight: bold;
+    }
+
+/* 2nd level. */
+.menu li ul {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 15rem;
+    padding: 1.5rem 0;
+    background: #F3F5F6;
+    transition: all 200ms ease;
+    z-index: 10000;
+    border-radius: 5px;
+}
+        
+    .menu li:hover > ul {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu li ul a {
+        display: block;
+        padding: 0.5rem 1.5rem;
+    }
+
+/* 3rd level. */
+.menu li ul li ul {
+    top: -1.5rem;
+    left: 100%;
+    z-index: 9000;
+}
+
+/* Drop-down arrows. */
+.menu > ul > li.has-submenu:after,
+.menu li ul li.has-submenu:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+}
+
+/* 1st level arrows. */
+.menu > ul > li.has-submenu:after {
+    right: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(0, 0, 0, .25);
+}
+
+/* 2nd level arrows. */
+.menu li ul li.has-submenu:after {
+    right: 1.5rem;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid rgba(0, 0, 0, .25);
+}
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Content.
+ * ------------------------------------------------------------------------- */
+
+.content {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Menu button.
+ * ------------------------------------------------------------------------- */
+
+.menu-button {
+    display: none;
+	transition: .3s ease-in-out;
+	width: 35px;
+	height: 24px;
+    position: relative;
+}
+
+    .menu-button.in-mobile {        
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    .menu-button span {
+        position: absolute;
+		height: 4px;
+		border-radius: 10px;
+		width: 100%;
+		background-color: #3D4146;
+		top: 0;
+		transition: transform .2s ease-in-out, opacity .2s ease-in-out;        
+    }
+
+        .menu-button span:nth-child(1) {
+			top: 0px;
+		}
+
+		.menu-button span:nth-child(2),
+		.menu-button span:nth-child(3) {
+			top: 10px;
+		}
+
+		.menu-button span:nth-child(4) {
+			top: 20px;
+		}
+
+            .menu-button.active span:nth-child(1),
+            .menu-button.active span:nth-child(4) {
+                opacity: 0;
+            }
+
+            .menu-button.active span:nth-child(2) {
+                transform: rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Desktop to mobile.
+ * ------------------------------------------------------------------------- */
+
+/* Mobile menu. */
+.mobile-menu {
+    background-color: #fff;
+    padding: 2rem;
+	position: absolute;
+	top: 2rem;
+	left: 2rem;
+	width: calc(100% - 4rem);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .3s, visibility .3s;
+    z-index: 99999;
+    box-shadow: 5px 5px 15px 0  rgba(0, 0, 0, .1);
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 10px;
+}
+
+    .mobile-menu.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    .mobile-menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+        .mobile-menu ul li {
+            float: left;
+            width: 45%;
+            margin: 0 2.5%;
+        }
+
+    .mobile-menu a {
+        color: #5067bc;
+        text-decoration: none;
+        display: block;
+        padding: .25rem 0;
+    }
+
+        .mobile-menu a:hover {
+            color: #3D4146;
+        }
+
+/* Typography.  */
+h6 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, .5);
+}
+
+hr {
+    margin: 2rem 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, .15);
+}
+
+@media screen and (max-width: 900px) {
+    .menu {
+        display: none;
+    }
+
+    .menu-button {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .mobile-menu ul li {
+        float: none;
+        width: 100%;
+        margin: 0;
+    }    
+}

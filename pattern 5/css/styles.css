@@ -1,0 +1,305 @@
+/** ---------------------------------------------------------------------------
+ * Reset.
+ * ------------------------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font: 16px/1.5 'Roboto', Arial, sans-serif;
+}
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Navbar.
+ * ------------------------------------------------------------------------- */
+
+.navbar {
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .navbar a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, .60);
+        transition: color 200ms ease-in;
+    }
+
+        .navbar li:hover > a {
+            color: rgba(0, 0, 0, .85);
+        }
+
+.logo img {
+    /* Get rid of the bottom whitespace present on inline elements. */
+    display: block;
+    max-height: 3.5rem;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    position: relative;
+}
+
+/* 1st level. */
+.menu > ul > li {
+    display: inline-block;
+}
+
+    .menu > ul > li > a {
+        display: inline-block;
+        padding: 1rem 1.5rem;
+        font-weight: bold;
+    }
+
+/* 2nd level. */
+.menu li ul {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 15rem;
+    padding: 1.5rem 0;
+    background: #F3F5F6;
+    transition: all 200ms ease;
+    z-index: 10000;
+    border-radius: 5px;
+}
+        
+    .menu li:hover > ul {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu li ul a {
+        display: block;
+        padding: 0.5rem 1.5rem;
+    }
+
+/* 3rd level. */
+.menu li ul li ul {
+    top: -1.5rem;
+    left: 100%;
+    z-index: 9000;
+}
+
+/* Drop-down arrows. */
+.menu > ul > li.has-submenu:after,
+.menu li ul li.has-submenu:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+}
+
+/* 1st level arrows. */
+.menu > ul > li.has-submenu:after {
+    right: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(0, 0, 0, .25);
+}
+
+/* 2nd level arrows. */
+.menu li ul li.has-submenu:after {
+    right: 1.5rem;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid rgba(0, 0, 0, .25);
+}
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Content.
+ * ------------------------------------------------------------------------- */
+
+.content {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Menu button.
+ * ------------------------------------------------------------------------- */
+
+.menu-button {
+    display: none;
+	transition: .3s ease-in-out;
+	width: 35px;
+	height: 24px;
+    position: relative;
+}
+
+    .menu-button.in-mobile {        
+        position: absolute;
+        top: 2rem;
+        left: 1rem;
+    }
+
+    .menu-button span {
+        position: absolute;
+		height: 4px;
+		border-radius: 10px;
+		width: 100%;
+		background-color: #3D4146;
+		top: 0;
+		transition: transform .2s ease-in-out, opacity .2s ease-in-out;        
+    }
+
+        .menu-button.active span {
+            background-color: #fff;
+        }
+
+        .menu-button span:nth-child(1) {
+			top: 0px;
+		}
+
+		.menu-button span:nth-child(2),
+		.menu-button span:nth-child(3) {
+			top: 10px;
+		}
+
+		.menu-button span:nth-child(4) {
+			top: 20px;
+		}
+
+            .menu-button.active span:nth-child(1),
+            .menu-button.active span:nth-child(4) {
+                opacity: 0;
+            }
+
+            .menu-button.active span:nth-child(2) {
+                transform: rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+
+
+
+
+
+/** ---------------------------------------------------------------------------
+ * Desktop to mobile.
+ * ------------------------------------------------------------------------- */
+
+/* Main content.  */
+.main-content {
+    transition: transform .3s;
+}
+
+/* Offcanvas menu. */
+.offcanvas {
+    background-color: #13181f;
+    padding: 6rem 0 2rem;
+	position: fixed;
+    width: 20rem;
+	top: 0;
+	left: -100%;
+	transition: left .3s;
+    z-index: 99999;
+    height: 100%;
+    overflow: scroll;
+    font-size: 85%;
+}
+
+    .menu-opened .offcanvas {
+        left: 0;
+    }
+
+    .menu-opened .main-content {
+        transform: translate3d(20rem, 0, 0);
+    }
+
+    .offcanvas ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .offcanvas nav a {
+        display: block;
+        padding: 1rem;
+        color: rgba(255, 255, 255, .8);
+        text-decoration: none;
+        transition: all .3s;
+    }
+
+        .offcanvas nav a:hover {
+            background-color: rgba(255, 255, 255, .1);
+        }
+
+    .offcanvas nav li {
+        position: relative;
+    }
+
+    /* 1st level. */
+    .offcanvas nav > ul > li > a {
+        font-weight: bold;
+    }
+
+    /* Lower levels. */
+    .offcanvas nav li ul {
+        padding-left: 2rem;
+        display: none;
+    }
+            
+    /* Drop-down arrows. */
+    .offcanvas nav li.has-submenu:after {
+        content: "";
+        position: absolute;
+        top: 1.6rem;
+        width: 0;
+        height: 0;
+    }
+
+    .offcanvas nav li.has-submenu:after {
+        right: 1rem;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid rgba(255, 255, 255, .25);
+    }
+
+    .offcanvas nav li.has-submenu.opened:after {
+        border-bottom: 5px solid rgba(255, 255, 255, .25);
+        border-top: none;
+    }
+
+@media screen and (max-width: 900px) {
+    .navbar {
+        justify-content: flex-start;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-button {
+        display: inline-block;
+        margin-right: 2rem;
+    }
+}

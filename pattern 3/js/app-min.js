@@ -1,0 +1,1 @@
+$(function(){$(".menu-button").on("click",function(n){n.preventDefault(),$(".mobile-menu").toggleClass("visible")})});
